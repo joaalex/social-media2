@@ -10,11 +10,11 @@ module.exports = {
         unique: true,
       },
       post_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID,
         primaryKey: true,
       },
       user_id: {
-        type: Sequelize.STRING,
+        type: Sequelize.UUID ,
         allowNull: false,
         references: {
           model: 'Users',

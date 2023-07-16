@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Reactions extends Model {
     /**
@@ -15,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Reactions.init({
     reaction_id: DataTypes.STRING,
-    post_id: DataTypes.STRING,
+    post_id: DataTypes.UUID,
     reaction: DataTypes.ENUM('like', 'dislike', 'love', 'funny'),
     user_id: DataTypes.UUID
   }, {

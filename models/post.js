@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const models = require('./index');
+
 module.exports = (sequelize, DataTypes) => {
   class Post extends Model {
     /**
@@ -11,15 +13,36 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Post.belongsToMany(models.Comments, {
+      //   through: "PostComments",
+      //   foreignKey: 'post_id',
+      //   as: 'post_comments'
+      // });
+
+      
     }
   }
   Post.init({
     post_id: DataTypes.UUID,
     user_id: DataTypes.UUID,
-    post: DataTypes.STRING
+    post: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Post',
-  });
+  },
+  Post.associate = (models) => {
+    Post.belongsToMany(models.Comments, {
+      through: "PostComments",
+        foreignKey: 'post_id',
+        as: 'post_comments'
+    });
+  }
+
+    
+  );
   return Post;
+
 };
+
+
+

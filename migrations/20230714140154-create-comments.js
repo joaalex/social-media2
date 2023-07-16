@@ -12,6 +12,13 @@ module.exports = {
       comment_id: {
         type: Sequelize.UUID
       },
+      post_id: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'Posts',
+          key: 'post_id'
+        }
+      },
       comments: {
         type: Sequelize.TEXT
       },

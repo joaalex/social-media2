@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const models = require('./index');
 module.exports = (sequelize, DataTypes) => {
   class Comments extends Model {
     /**
@@ -11,10 +12,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Comments.belongsTo(models.Post, {
+        foreignKey: 'post_id',
+        as: 'post_comments'
+      })
     }
   }
   Comments.init({
-    comment_id: DataTypes.STRING,
+    comment_id: DataTypes.UUID,
+    post_id: DataTypes.UUID,
     comments: DataTypes.STRING,
     user_id: DataTypes.UUID
   }, {
